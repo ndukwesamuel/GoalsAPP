@@ -26,6 +26,10 @@ app.use(cors());
 app.use("/api/goals", goalRoutes);
 app.use("/api/users", require("./routes/userRoutes"));
 
+app.get("/", (req, res) => {
+  res.json("this is working");
+});
+
 // // Serve frontend
 // if (process.env.NODE_ENV === "production") {
 //   app.use(express.static(path.join(__dirname, "./my-app/build")));
