@@ -15,33 +15,33 @@ app.use(express.urlencoded({ extended: false }));
 
 // stack: process.env.NODE_ENV === "production" ? null : err.stack,
 
-if (process.env.NODE_ENV === "production") {
-  console.log("this is production ");
-} else {
-  console.log("this is local");
-}
+// if (process.env.NODE_ENV === "production") {
+//   console.log("this is production ");
+// } else {
+//   console.log("this is local");
+// }
 
 app.use(cors());
 
 app.use("/api/goals", goalRoutes);
 app.use("/api/users", require("./routes/userRoutes"));
 
-// Serve frontend
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "./my-app/build")));
+// // Serve frontend
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "./my-app/build")));
 
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "./", "my-app", "build", "index.html"))
-  );
-} else if (process.env.NODE_ENV === "development") {
-  app.use(express.static(path.join(__dirname, "./my-app/build")));
+//   app.get("*", (req, res) =>
+//     res.sendFile(path.resolve(__dirname, "./", "my-app", "build", "index.html"))
+//   );
+// } else if (process.env.NODE_ENV === "development") {
+//   app.use(express.static(path.join(__dirname, "./my-app/build")));
 
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "./", "my-app", "build", "index.html"))
-  );
-} else {
-  app.get("/", (req, res) => res.send("Please set to production"));
-}
+//   app.get("*", (req, res) =>
+//     res.sendFile(path.resolve(__dirname, "./", "my-app", "build", "index.html"))
+//   );
+// } else {
+//   app.get("/", (req, res) => res.send("Please set to production"));
+// }
 
 /// to overide the defoult error handelr
 app.use(errorHandler);
